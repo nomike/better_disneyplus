@@ -64,7 +64,7 @@
     'use strict';
     async function loadSpeed() {
         console.debug("Loading speed from GM settings");
-        let speed = await GM.getValue("playback_speed4", JSON.stringify(1.0));
+        let speed = await GM.getValue("playback_speed", JSON.stringify(1.0));
         if (speed != undefined) {
             console.debug("speed[", typeof speed, "]=", speed);
             value = parseFloat(JSON.parse(speed));
@@ -85,7 +85,7 @@
 
     function saveSpeed(a) {
         console.debug("Saving speed=", a);
-        GM.setValue("playback_speed4", JSON.stringify(a));
+        GM.setValue("playback_speed", JSON.stringify(a));
     }
 
     // Change the speed of the player
