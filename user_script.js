@@ -1,10 +1,14 @@
 // ==UserScript==
-// @name      Better Disney+
-// @namespace https://nomike.com/
-// @version   3
-// @grant     GPLv3
-// @match     https://www.disneyplus.com/video/*
-// @run-at    document-idle
+// @name               Better Disney+
+// @namespace          https://nomike.com/
+// @version            4
+// @grant              GPLv3
+// @match              https://www.disneyplus.com/video/*
+// @run-at             document-idle
+// @grant              GM.setValue
+// @grant              GM.getValue
+// @grant              GM.deleteValue
+// @grant              GM.listValues
 // ==/UserScript==
 
 /*
