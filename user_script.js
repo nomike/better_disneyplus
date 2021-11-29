@@ -142,9 +142,10 @@
             styleSheet.innerHTML = tooltip_css;
             document.head.appendChild(styleSheet);
 
-            document.getElementsByClassName('controls__right')[0].appendChild(createSpeedButton(svg_speed_minus, -0.1, "click"));
-            document.getElementsByClassName('controls__right')[0].appendChild(createSpeedButton(svg_speed_scroll, 0.1, "scroll"));
-            document.getElementsByClassName('controls__right')[0].appendChild(createSpeedButton(svg_speed_plus, 0.1, "click"));
+            controls = document.getElementsByClassName('controls__right')[0];
+            controls.insertBefore(createSpeedButton(svg_speed_plus, 0.1, "click"), controls.firstChild);
+            controls.insertBefore(createSpeedButton(svg_speed_scroll, 0.1, "scroll"), controls.firstChild);
+            controls.insertBefore(createSpeedButton(svg_speed_minus, -0.1, "click"), controls.firstChild);
         }
     }, 500); // check every 500ms
 
