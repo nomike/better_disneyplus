@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Better Disney+
 // @namespace https://nomike.com/
-// @version   2
+// @version   3
 // @grant     GPLv3
 // @match     https://www.disneyplus.com/video/*
 // @run-at    document-idle
