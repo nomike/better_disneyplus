@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               Better Disney+
 // @namespace          https://nomike.com/
-// @version            8
+// @version            9
 // @grant              GPLv3
 // @match              https://www.disneyplus.com/*
 // @run-at             document-idle
@@ -170,11 +170,31 @@
     styleSheet.innerHTML = tooltip_css;
     document.head.appendChild(styleSheet);
 
+    function addKeyListener() {
+        console.debug("Add key listener");
+        document.addEventListener('keypress', function(event) {
+            kc = event.keyCode
+            if (kc === 32) {
+                document.getElementsByClassName('btm-media-client-element')[0].click();
+            }
+            /* Disney+ does not like seeking around like that so this is disabled for the time being */
+            //         if ((kc >= 48 && kc <= 57) || (kc >= 69 && kc <= 105)) {
+            //           if(event.keyCode >= 69) {
+            //             seek = event.keyCode - 69;
+            //           } else {
+            //             seek = event.keyCode - 48
+            //           }
+            // 					console.debug("Duration=", document.querySelector('video').duration, " currentTime=", document.querySelector('video').duration * (seek / 10));
+            //           document.querySelector('video').currentTime = document.querySelector('video').duration * (seek / 10);
+            //         }
+        });
+    }
 
     /* Wait for player controls to appear and add the speed control buttons and
        apply the saved speed to the player */
     var checkExist = setInterval(function() {
         if (document.getElementsByClassName('controls__right').length > 0 && document.getElementsByClassName('mute-btn').length > 0 && document.getElementsByClassName('speed_minus_btn').length == 0) {
+            addKeyListener();
             console.debug("Apply currently saved speed to player");
             setSpeed(0.0);
 
@@ -186,5 +206,4 @@
             addScrollwheelCapabilityToAudioButton();
         }
     }, 500); // check every 500ms
-
 })();
