@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name               Better Disney+
 // @namespace          https://nomike.com/
-// @version            4
+// @version            5
 // @grant              GPLv3
-// @match              https://www.disneyplus.com/video/*
+// @match              https://www.disneyplus.com/*
 // @run-at             document-idle
 // @grant              GM.setValue
 // @grant              GM.getValue
