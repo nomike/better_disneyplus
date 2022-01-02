@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               Better Disney+
 // @namespace          https://nomike.com/
-// @version            7
+// @version            8
 // @grant              GPLv3
 // @match              https://www.disneyplus.com/*
 // @run-at             document-idle
@@ -144,6 +144,26 @@
         return b;
     }
 
+    /* add scrollwheel capability to audio button */
+    function addScrollwheelCapabilityToAudioButton() {
+        console.debug("Add scrollwheel capability to audio button");
+        b = document.getElementsByClassName('audio-control')[0];
+        b.addEventListener("wheel", event => {
+            setPlayerVolume(0.1 * Math.sign(event.deltaY) * -1);
+        });
+    }
+
+    function setPlayerVolume(delta) {
+        newVolume = document.querySelector('video').volume + delta;
+        if (newVolume < 0.0) {
+            newVolume = 0.0;
+        }
+        if (newVolume > 1.0) {
+            newVolume = 1.0;
+        }
+        document.querySelector('video').volume = newVolume;
+    }
+
     /* add the style sheet */
     var styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
@@ -154,7 +174,7 @@
     /* Wait for player controls to appear and add the speed control buttons and
        apply the saved speed to the player */
     var checkExist = setInterval(function() {
-        if (document.getElementsByClassName('controls__right').length > 0 && document.getElementsByClassName('speed_minus_btn').length == 0) {
+        if (document.getElementsByClassName('controls__right').length > 0 && document.getElementsByClassName('mute-btn').length > 0 && document.getElementsByClassName('speed_minus_btn').length == 0) {
             console.debug("Apply currently saved speed to player");
             setSpeed(0.0);
 
@@ -162,6 +182,8 @@
             controls.insertBefore(createSpeedButton(svg_speed_plus, 0.1, "click"), controls.firstChild);
             controls.insertBefore(createSpeedButton(svg_speed_scroll, 0.1, "scroll"), controls.firstChild);
             controls.insertBefore(createSpeedButton(svg_speed_minus, -0.1, "click"), controls.firstChild);
+
+            addScrollwheelCapabilityToAudioButton();
         }
     }, 500); // check every 500ms
 
