@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               Better Disney+
 // @namespace          https://nomike.com/
-// @version            5
+// @version            6
 // @grant              GPLv3
 // @match              https://www.disneyplus.com/*
 // @run-at             document-idle
@@ -139,8 +139,8 @@
 
     var checkExist = setInterval(function() {
         console.debug("Apply current speed to player");
-        setSpeed(0.0);
         if (document.getElementsByClassName('controls__right').length > 0 && document.getElementsByClassName('speed_minus_btn').length == 0) {
+            setSpeed(0.0);
             var styleSheet = document.createElement("style");
             styleSheet.type = "text/css";
             styleSheet.innerHTML = tooltip_css;
